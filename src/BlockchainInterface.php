@@ -82,11 +82,12 @@ interface BlockchainInterface {
    *
    * @param int $block
    * @return array
-   *  Struct {block, time, confirmations, txs}
+   *  Struct {block, time, confirmations, total_supply, txs}
    *  Where
    *    block - number of block (same as given in arg)
    *    time - unix timestamp when block confirmed
    *    confirmations - how many blocks past after this one
+   *    total_supply – total tokens available in value presentation
    *    txs - array of transactions in block in format of getAddressTxs method
    */
   public function getBlock(int $block): array;
@@ -98,6 +99,15 @@ interface BlockchainInterface {
    * @return array
    */
   public function getLastBlock(): array;
+
+  /**
+   * Get transaction information by hash
+   * in format of {hash => {value, time, confirmations}}
+   *
+   * @param string $tx
+   * @return array
+   */
+  public function getTx(string $tx): array;
 
   /**
    * Send money transfer to blockchain
@@ -114,7 +124,7 @@ interface BlockchainInterface {
    *  [error, tx]
    * tx represents structure {raw, hash}
    */
-  public function sign(array $inputs, array $targets, int|string $fee): array;
+  public function signTx(array $inputs, array $targets, int|string $fee): array;
 
   /**
    * Submit raw transaction to network
@@ -123,7 +133,7 @@ interface BlockchainInterface {
    * @param array $tx returned tx after sign
    * @return array
    */
-  public function submit(array $tx): array;
+  public function submitTx(array $tx): array;
 
   /**
    * Does blockchain support multiple inputs and outputs in one transaction
