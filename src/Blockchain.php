@@ -10,7 +10,8 @@ final class Blockchain {
    *  Map with key as blockchain code to struct
    *  Struct contains of these keys
    *   class - Name of class that implements BlockchainInterface
-   *   args - Arguments that passed to constructor for initialization
+   *   args - Closure with returned arguments to lazy load that passed to constructor
+   *          Also can be as simple array but in that case it will be executed on init
    *   fraction - fraction for currency
    */
   protected static array $blockchain_map;
@@ -38,7 +39,8 @@ final class Blockchain {
       throw new Error('Cannot find configuration for currency: ' . $currency);
     }
 
-    return new $config['class'](...$config['args']);
+    $args = is_callable($config['args']) ? $config['args']() : $config['args'];
+    return new $config['class'](...$args);
 
   }
 }
