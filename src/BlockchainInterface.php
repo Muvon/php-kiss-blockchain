@@ -102,8 +102,15 @@ interface BlockchainInterface {
 
   /**
    * Get transaction information by hash
-   * in format of {hash => {value, time, confirmations}}
-   *
+   * in format of {hash, value, time, confirmations, from[address1, address2...], to[{address, value}, ...]}}
+   * Where is
+   *  hash - tx id
+   *  value - total amount of transacted value
+   *  confirmation - blocks since this tx to current time
+   *  from - array of source address [addr1, addr2, ...]
+   *  to - array of destinations with struct {address, value}
+   *  fee - total fees of this tx
+   * 
    * @param string $tx
    * @return array
    */
