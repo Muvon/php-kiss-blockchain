@@ -4,57 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f3493132fb2c617ea817fddf77b126ae",
-    "packages": [
-        {
-            "name": "muvon/kiss-money",
-            "version": "0.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Muvon/php-kiss-money.git",
-                "reference": "0c7746f6b0c31089fa1fc1d2873da47625aec4eb"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Muvon/php-kiss-money/zipball/0c7746f6b0c31089fa1fc1d2873da47625aec4eb",
-                "reference": "0c7746f6b0c31089fa1fc1d2873da47625aec4eb",
-                "shasum": ""
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^9"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Muvon\\KISS\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Muvon Co. Ltd",
-                    "email": "contact@muvon.io"
-                }
-            ],
-            "description": "KISS implementation of Money manipuliation logic",
-            "keywords": [
-                "amount",
-                "currency",
-                "kiss",
-                "lightweight",
-                "money",
-                "value"
-            ],
-            "support": {
-                "issues": "https://github.com/Muvon/php-kiss-money/issues",
-                "source": "https://github.com/Muvon/php-kiss-money/tree/0.2.0"
-            },
-            "time": "2021-03-14T11:31:04+00:00"
-        }
-    ],
+    "content-hash": "a493e8725d8dd7e0c29aafe34eb501d3",
+    "packages": [],
     "packages-dev": [
         {
             "name": "doctrine/instantiator",
