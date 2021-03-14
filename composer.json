@@ -1,0 +1,39 @@
+{
+  "name": "muvon/kiss-blockchain",
+  "description": "KISS implementation of Blockhain manipulations",
+  "keywords": [
+    "blockchain",
+    "rpc",
+    "btc",
+    "xrp",
+    "ltc",
+    "kiss",
+    "transaction",
+    "bitcoin",
+    "litecoin",
+    "ripple",
+    "bch",
+    "tron",
+    "api"
+  ],
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Muvon Co. Ltd",
+      "email": "contact@muvon.io"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require-dev": {
+    "phpunit/phpunit": "^9"
+  },
+  "require": {
+    "muvon/kiss-money": "0.2.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Muvon\\KISS\\": "src/"
+    }
+  }
+}
