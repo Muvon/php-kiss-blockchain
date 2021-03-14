@@ -27,31 +27,30 @@ interface BlockchainInterface {
    * Get balance for address
    *
    * @param string $address
-   * @return string|float|bool
+   * @return array [err, balance]
    *   Balance as number or false if it was error while api quering
    */
   public function getAddressBalance(string $address): array;
 
   /**
    * Get transaction for given address
-   * in format of {hash => {value, time, confirmations}}
-   * In case of deposit - value > 0
-   * In case of transfer out - value < 0
+   * in same format @see static::getTx()
    *
    * @param string $address
    * @param int $limit
    * @param int $since_ts
-   * @return array
+   * @return array [err, txs]
    */
   public function getAddressTxs(string $address, int $limit = 100, int $since_ts = 0): array;
 
   /**
    * Get only deposit transaction for given address
-   * in format of {hash => {value, time, confirmations}}
+   * in same format @see static::getTx()
    *
    * @param string $address
    * @param int $limit
    * @param int $confirmations
+   * @return array [err, txs]
    */
   public function getAddressDepositMap(string $address, int $limit = 100, int $confirmations = 0): array;
 
@@ -102,15 +101,20 @@ interface BlockchainInterface {
 
   /**
    * Get transaction information by hash
-   * in format of {hash, value, time, confirmations, from[address1, address2...], to[{address, value}, ...]}}
+   * Returns array with struct
    * Where is
+   *  block - which block this transaction belongs to or 0 in case mempool
    *  hash - tx id
    *  value - total amount of transacted value
+   *  account - null or address in case we check specific one
+   *  balance - null or change of balance in case we check specific address
+   *    In case of deposit - balance > 0
+   *    In case of transfer out - balance < 0
    *  confirmation - blocks since this tx to current time
-   *  from - array of source address [addr1, addr2, ...]
+   *  from - array of unique source addresses [addr1, addr2, ...]
    *  to - array of destinations with struct {address, value}
    *  fee - total fees of this tx
-   * 
+   *
    * @param string $tx
    * @return array
    */
@@ -122,7 +126,7 @@ interface BlockchainInterface {
    * @param array $inputs
    *   One or more inputs for sending transaction in format
    *     [{address, amount, secret[]}, ...]
-   * @param array $targets
+   * @param array $outputs
    *   One or more targets as list of targets
    *     [{address, amount}, ...]
    * @param int|string $fee
@@ -130,8 +134,10 @@ interface BlockchainInterface {
    * @return array
    *  [error, tx]
    * tx represents structure {raw, hash}
+   * Used to pass in method submitTx
+   * Must have hash index and any count of other fields
    */
-  public function signTx(array $inputs, array $targets, int|string $fee): array;
+  public function signTx(array $inputs, array $outputs, int|string $fee): array;
 
   /**
    * Submit raw transaction to network
