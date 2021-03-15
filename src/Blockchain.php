@@ -13,7 +13,7 @@ final class Blockchain {
    *  But with same blockchain and different initialization (maybe)
    *
    *  Struct contains of these keys
-   *   class - Name of class that implements BlockchainInterface
+   *   class - Name of class that implements BlockchainClientInterface
    *   args - Closure with returned arguments to lazy load that passed to constructor
    *          Also can be as simple array but in that case it will be executed on init
    *
@@ -36,9 +36,9 @@ final class Blockchain {
    * Check and create class of blockchain for given currency
    *
    * @param string $currency
-   * @return BlockchainInterface
+   * @return BlockchainClientInterface
    */
-  public static function create(string $currency): BlockchainInterface {
+  public static function create(string $currency): BlockchainClientInterface {
     $config = static::$blockchain_map[$currency] ?? [];
     if (!$config) {
       throw new Error('Cannot find configuration for currency: ' . $currency);

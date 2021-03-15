@@ -13,7 +13,7 @@ namespace Muvon\KISS;
  * All amounts in responses should be returned as value
  * Value is minor amount that should be int/string
  */
-interface BlockchainInterface {
+interface BlockchainClientInterface {
   /**
    * Generate new address
    * It should return array with keys
@@ -46,6 +46,8 @@ interface BlockchainInterface {
   /**
    * Get only deposit transaction for given address
    * in same format @see static::getTx()
+   * *This methods is defined by default in abstract BlockchainClient
+   * @see BlockchainClient
    *
    * @param string $address
    * @param int $limit
@@ -95,6 +97,8 @@ interface BlockchainInterface {
   /**
    * Get last block data
    * Returns same struct as getBlock method but for last active block
+   * *This methods is defined by default in abstract BlockchainClient
+   * @see BlockchainClient
    *
    * @return array
    */
@@ -150,6 +154,19 @@ interface BlockchainInterface {
   public function submitTx(array $tx): array;
 
   /**
+   * Send transaction without middle step of signTx
+   * Contains 2 calls signTx and submitTx
+   * @see BlockchainClientInterface::signTx
+   * @see BlockchainClientInterface::submitTx
+   *
+   * @param array $inputs
+   * @param array $outputs
+   * @param int|string $fee
+   * @return array
+   */
+  public function send(array $inputs, array $outputs, int|string $fee = 0): array;
+
+  /**
    * Does blockchain support multiple inputs and outputs in one transaction
    *
    * @return bool
@@ -159,7 +176,7 @@ interface BlockchainInterface {
   /**
    * Method to get confirmations for irreversible transactions
    * If you need to change it just extend class and redefine method
-   * 
+   *
    * @return int
    */
   public function getConfirmations(): int;
