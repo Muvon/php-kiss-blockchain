@@ -8,11 +8,16 @@ final class Blockchain {
   /**
    * @property array $blockchain_map
    *  Map with key as blockchain code to struct
+   *
+   *  If same blockchain has several currencies we define it all
+   *  But with same blockchain and different initialization (maybe)
+   *
    *  Struct contains of these keys
    *   class - Name of class that implements BlockchainInterface
    *   args - Closure with returned arguments to lazy load that passed to constructor
    *          Also can be as simple array but in that case it will be executed on init
-   *   fraction - fraction for currency
+   *
+   *  All fields marked as * are optional and rewrite blockchain defined values
    */
   protected static array $blockchain_map;
 
@@ -41,6 +46,5 @@ final class Blockchain {
 
     $args = is_callable($config['args']) ? $config['args']() : $config['args'];
     return new $config['class'](...$args);
-
   }
 }

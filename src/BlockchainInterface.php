@@ -126,10 +126,10 @@ interface BlockchainInterface {
    *
    * @param array $inputs
    *   One or more inputs for sending transaction in format
-   *     [{address, amount, secret[]}, ...]
+   *     [{address, value, secret[]}, ...]
    * @param array $outputs
    *   One or more targets as list of targets
-   *     [{address, amount}, ...]
+   *     [{address, value}, ...]
    * @param int|string $fee
    *   Fee for total transaction. In value representation (minor amount)
    * @return array
@@ -155,4 +155,12 @@ interface BlockchainInterface {
    * @return bool
    */
   public function hasMultipleOutputs(): bool;
+
+  /**
+   * Method to get confirmations for irreversible transactions
+   * If you need to change it just extend class and redefine method
+   * 
+   * @return int
+   */
+  public function getConfirmations(): int;
 }
