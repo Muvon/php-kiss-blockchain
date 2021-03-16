@@ -83,13 +83,12 @@ interface BlockchainClientInterface {
    *
    * @param int $block
    * @return array
-   *  Struct {block, time, confirmations, total_supply, txs}
+   *  Struct {hash, block, time, confirmations, txs}
    *  Where
-   *    hash – hash of the block
+   *    hash – hash of the block if
    *    block - number of block (same as given in arg)
    *    time - unix timestamp when block confirmed
    *    confirmations - how many blocks past after this one
-   *    total_supply – total tokens available in value presentation
    *    txs - list of transaction hashes that included in this block
    */
   public function getBlock(int $block): array;
