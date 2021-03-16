@@ -105,6 +105,12 @@ interface BlockchainClientInterface {
   public function getLastBlock(): array;
 
   /**
+   * This method returns total supply of coins in blockchain according to latest block
+   * @return string value representation of coins
+   */
+  public function getTotalSupply(): string;
+
+  /**
    * Get transaction information by hash
    * Returns array with struct
    * Where is
