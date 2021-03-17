@@ -133,6 +133,14 @@ interface BlockchainClientInterface {
   public function getTx(string $tx): array;
 
   /**
+   * Simple validation of tx hash format if valid or not
+   *
+   * @param string $hash
+   * @return bool
+   */
+  public function isTxValid(string $hash): bool;
+
+  /**
    * Send money transfer to blockchain
    *
    * @param array $inputs
