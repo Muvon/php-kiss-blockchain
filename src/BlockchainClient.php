@@ -37,13 +37,13 @@ abstract class BlockchainClient implements BlockchainClientInterface {
    *
    * @return array [string|null $err, null|array $block]
    */
-  public function getLastBlock(): array {
+  public function getLastBlock(bool $expand = false): array {
     [$err, $index] = $this->getBlockNumber();
     if ($err) {
       return [$err, null];
     }
 
-    return $this->getBlock($index);
+    return $this->getBlock($index, $expand);
   }
 
   /**

@@ -82,6 +82,7 @@ interface BlockchainClientInterface {
    * Get block information by index
    *
    * @param int $block
+   * @param bool $expand if we should expand txs or not
    * @return array
    *  Struct {hash, block, time, confirmations, txs}
    *  Where
@@ -91,7 +92,7 @@ interface BlockchainClientInterface {
    *    confirmations - how many blocks past after this one
    *    txs - list of transaction hashes that included in this block
    */
-  public function getBlock(int $block): array;
+  public function getBlock(int $block, bool $expand = false): array;
 
   /**
    * Get last block data
@@ -99,9 +100,10 @@ interface BlockchainClientInterface {
    * *This methods is defined by default in abstract BlockchainClient
    * @see BlockchainClient
    *
+   * @param bool $expand same as in method getBlock
    * @return array
    */
-  public function getLastBlock(): array;
+  public function getLastBlock(bool $expand = false): array;
 
   /**
    * This method returns total supply of coins in blockchain according to latest block
